@@ -1,4 +1,5 @@
 package diet;
+
 import food.*;
 import animals.Animal;
 

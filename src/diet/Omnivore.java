@@ -3,15 +3,17 @@ package diet;
 import animals.Animal;
 import food.EFoodType;
 import food.IEdible;
-import mobility.Point;
 
-public class Omnivore extends Animal implements IDiet {
-
-	public Omnivore(String name, Point point) {
-		super(name, point);
-		// TODO Auto-generated constructor stub
+public class Omnivore implements IDiet {
+	// apparently it is to avoid code duplication?
+	private IDiet omnivore;
+	private IDiet herbivore;
+	
+	public Omnivore() {
+		omnivore = new Omnivore();
+		herbivore = new Herbivore();
 	}
-
+	
 	@Override
 	public boolean canEat(EFoodType food) {
 		if (food != EFoodType.NOTFOOD)
@@ -21,10 +23,8 @@ public class Omnivore extends Animal implements IDiet {
 
 	@Override
 	public double eat(Animal animal, IEdible food) {
-		if (canEat(food.getFoodType())) {
-			// eat..
-		}
-		return 0;
+		// assuming one will return 0?
+		// what is the return type for?
+		return omnivore.eat(animal, food) + herbivore.eat(animal, food);
 	}
-
 }

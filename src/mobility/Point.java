@@ -11,13 +11,12 @@ public class Point {
 	private int y;
 	
 	public Point(int x, int y) {
-		// consider using setY and setX
-		this.x = x;
-		this.y = y;
+		setX(x);
+		setY(y);
 	}
 	
 	public boolean setY(int y) {
-		if (y <= MAX_Y && y >= MIN_Y) {
+		if (MIN_Y <= y && y <= MAX_Y) {
 			this.y = y;
 			MessageUtility.logSetter("Point", "setY()", y, true);
 			return true;
@@ -27,7 +26,7 @@ public class Point {
 	}
 	
 	public boolean setX(int x) {
-		if (x <= MAX_X && x >= MIN_X) {
+		if (MIN_X <= x && x <= MAX_X) {
 			this.x = x;
 			MessageUtility.logSetter("Point", "setX()", x, true);
 			return true;
@@ -44,5 +43,12 @@ public class Point {
 	public int getY() {
 		MessageUtility.logGetter("Point", "getY()", y);
 		return this.y;
+	}
+
+	public static boolean cheackBounderies(Point newLocation) {
+		if (MIN_X <= newLocation.getX() && newLocation.getX() <= MAX_X)
+			if (MIN_Y <= newLocation.getY() && newLocation.getY() <= MAX_Y)
+				return true;
+		return false;
 	}
 }

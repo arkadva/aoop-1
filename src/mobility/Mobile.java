@@ -8,11 +8,11 @@ public abstract class Mobile implements Ilocatable {
 	
 	public Mobile(Point point) {
 		this.location = point;
-		this.totalDistance = 0.0;
+		this.setTotalDistance(0.0);
 	}
 
 	public void addTotalDistance(double distance) {
-		this.totalDistance += distance;
+		this.setTotalDistance(this.getTotalDistance() + distance);
 	}
 	
 	public double calcDistance(Point point) {
@@ -26,15 +26,30 @@ public abstract class Mobile implements Ilocatable {
 	}
 	
 	@Override
-	public Point getLocation() {
-		MessageUtility.logGetter("Mobile", "getLocation()", location);
-		return location;
+	public boolean setLocation(Point point) {
+		move(point);
+		MessageUtility.logSetter("Mobile", "setLocation()", location, true);
+		return true;
 	}
 	
 	@Override
-	public boolean setLocation(Point point) {
-		this.location = point;
-		MessageUtility.logSetter("Mobile", "getLocation()", location, true);
-		return true;
+	public Point getLocation() {
+		MessageUtility.logGetter("Mobile", "getLocation()", this.location);
+		return location;
+	}
+
+	public boolean setTotalDistance(double totalDistance) {
+		if (totalDistance >= 0) {
+			this.totalDistance = totalDistance;
+			MessageUtility.logSetter("Mobile", "setTotalDistance()", totalDistance, true);
+			return true;
+		}
+		MessageUtility.logSetter("Mobile", "setTotalDistance()", totalDistance, false);
+		return false;
+	}
+	
+	public double getTotalDistance() {
+		MessageUtility.logGetter("Mobile", "getTotalDistance()", this.totalDistance);
+		return totalDistance;
 	}
 }
